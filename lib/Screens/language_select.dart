@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nepali_culture/Screens/homescreen.dart';
 import 'package:nepali_culture/Screens/nepali_home_Screen.dart';
-import 'package:nepali_culture/materials/drawer.dart';
-// import 'package:intl/intl.dart';
-// import 'package:intl/locale.dart';
 
 class Language extends StatefulWidget {
-  Language({super.key});
+  const Language({super.key});
 
   @override
   State<Language> createState() => _LanguageState();
@@ -15,9 +12,6 @@ class Language extends StatefulWidget {
 class _LanguageState extends State<Language> {
   bool isValue = true;
   bool isValue1 = false;
-  void checkbox() {
-    isValue = !isValue;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +75,7 @@ class _LanguageState extends State<Language> {
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(Icons.circle_rounded,
                                 color: isValue1
-                                    ? Colors.transparent
+                                    ? Color.fromRGBO(217, 217, 217, 1)
                                     : Color.fromRGBO(245, 128, 32, 1)),
                           ),
                           SizedBox(
@@ -153,17 +147,15 @@ class _LanguageState extends State<Language> {
           ),
           InkWell(
             onTap: () {
-              print(isValue);
-              if (isValue = true) {
-                Navigator.pushReplacement(context,
+              if (isValue1 = !isValue1) {
+                Navigator.push(context,
                     MaterialPageRoute(builder: (context) => HomeScreen()));
               } else {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => NepaliHomeScreen()));
               }
-              print(isValue);
             },
             child: Container(
               height: 63,

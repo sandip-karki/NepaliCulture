@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nepali_culture/Screens/homescreen.dart';
+
 import 'package:nepali_culture/Screens/language_select.dart';
 
 class SplashScreean extends StatelessWidget {
