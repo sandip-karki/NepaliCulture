@@ -1,0 +1,41 @@
+name: nepali_culture
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.5
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/nepalmap.jpg
+    - assets/images/NepalFlag.png
+    - assets/images/US.jpg
+    - assets/images/GreaterNepal.png
+    - assets/icons/NepalMapIcon.png
+    - assets/icons/GreaterNepalMapIcon.png
+    - assets/icons/Glories.png
+    - assets/icons/Martyrsicon.png
+    - assets/icons/NepaliCulture.png
+    - assets/icons/religion.png
+    - assets/icons/share.png
+    - assets/icons/Province.png
+    - assets/icons/aboutus.png
+    
+
+    
+
+   
