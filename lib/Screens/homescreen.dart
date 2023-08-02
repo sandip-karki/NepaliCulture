@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nepali_culture/helper/show_exit_dialog_helper.dart';
 import 'package:nepali_culture/materials/appbar.dart';
 
 import 'package:nepali_culture/materials/drawer.dart';
@@ -27,26 +28,4 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: NavBar(),
     );
   }
-}
-
-Future<bool> showExitDialog(BuildContext context) async {
-  return await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-              title: Text('Exit'),
-              content: Text('Do you really want to exit?'),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(false);
-                  },
-                  child: Text('No'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                  child: Text('Yes'),
-                ),
-              ]));
 }
