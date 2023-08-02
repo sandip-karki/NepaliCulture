@@ -1,248 +1,283 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:nepali_culture/Screens/culture.dart';
 import 'package:nepali_culture/Screens/glories.dart';
 import 'package:nepali_culture/Screens/greater_nepal.dart';
 import 'package:nepali_culture/Screens/homescreen.dart';
+import 'package:nepali_culture/Screens/language_select.dart';
 import 'package:nepali_culture/Screens/martyrs.dart';
 import 'package:nepali_culture/Screens/province.dart';
 import 'package:nepali_culture/Screens/religions.dart';
+import 'package:nepali_culture/Screens/splashscreen.dart';
 import 'package:nepali_culture/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../helper/show_exit_dialog_helper.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
+  Future<void> onTapButton() async {
+    var sharedPrefs = await SharedPreferences.getInstance();
+    sharedPrefs.remove(SplashScreeanState.loginKey);
+    sharedPrefs.remove("EnglishClick");
+    sharedPrefs.remove("NepaliClick");
+  }
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     return SafeArea(
-      child: Drawer(
-        child: ListView(padding: EdgeInsets.zero, children: [
-          Image.asset('assets/images/GreaterNepal.png', fit: BoxFit.fill),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Column(
-              children: [
-                ListTile(
-                  leading: Image.asset(
-                    "assets/icons/NepalMapIcon.png",
-                    height: 50,
-                    width: 50,
-                    color:
-                        themeProvider.isDarkTheme ? Colors.white : Colors.black,
-                  ),
-                  title: Text(
-                    'About Nepal',
-                    style: TextStyle(
-                      fontSize: 18,
+      child: WillPopScope(
+        onWillPop: () => showExitDialog(context),
+        child: Drawer(
+          child: ListView(padding: EdgeInsets.zero, children: [
+            Image.asset('assets/images/GreaterNepal.png', fit: BoxFit.fill),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/icons/NepalMapIcon.png",
+                      height: 50,
+                      width: 50,
+                      color: themeProvider.isDarkTheme
+                          ? Colors.white
+                          : Colors.black,
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ListTile(
-                  leading: Image.asset(
-                    "assets/icons/GreaterNepalMapIcon.png",
-                    height: 50,
-                    width: 50,
-                    color:
-                        themeProvider.isDarkTheme ? Colors.white : Colors.black,
-                  ),
-                  title: Text(
-                    'Greater Nepal',
-                    style: TextStyle(
-                      fontSize: 18,
+                    title: Text(
+                      'About Nepal',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeScreen()));
+                    },
                   ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => GreaterNepal()));
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ListTile(
-                  leading: Image.asset(
-                    "assets/icons/NepaliCulture.png",
-                    height: 50,
-                    width: 50,
-                    color:
-                        themeProvider.isDarkTheme ? Colors.white : Colors.black,
+                  SizedBox(
+                    height: 10,
                   ),
-                  title: Text(
-                    'Culture',
-                    style: TextStyle(
-                      fontSize: 18,
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/icons/GreaterNepalMapIcon.png",
+                      height: 50,
+                      width: 50,
+                      color: themeProvider.isDarkTheme
+                          ? Colors.white
+                          : Colors.black,
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CultureScreen()));
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ListTile(
-                  leading: Image.asset(
-                    "assets/icons/Glories.png",
-                    height: 50,
-                    width: 50,
-                    color:
-                        themeProvider.isDarkTheme ? Colors.white : Colors.black,
-                  ),
-                  title: Text(
-                    'Glories',
-                    style: TextStyle(
-                      fontSize: 18,
+                    title: Text(
+                      'Greater Nepal',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => GreaterNepal()));
+                    },
                   ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => GloriesScreen()));
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ListTile(
-                  leading: Image.asset(
-                    "assets/icons/religion.png",
-                    height: 50,
-                    width: 50,
-                    color:
-                        themeProvider.isDarkTheme ? Colors.white : Colors.black,
+                  SizedBox(
+                    height: 10,
                   ),
-                  title: Text(
-                    'Religions',
-                    style: TextStyle(
-                      fontSize: 18,
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/icons/NepaliCulture.png",
+                      height: 50,
+                      width: 50,
+                      color: themeProvider.isDarkTheme
+                          ? Colors.white
+                          : Colors.black,
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ReligionsScreen()));
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ListTile(
-                  leading: Image.asset(
-                    "assets/icons/Martyrsicon.png",
-                    height: 50,
-                    color:
-                        themeProvider.isDarkTheme ? Colors.white : Colors.black,
-                    width: 50,
-                  ),
-                  title: Text(
-                    'Martyrs',
-                    style: TextStyle(
-                      fontSize: 18,
+                    title: Text(
+                      'Culture',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CultureScreen()));
+                    },
                   ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MartyrsScreen()));
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ListTile(
-                  leading: Image.asset(
-                    "assets/icons/Province.png",
-                    height: 50,
-                    width: 50,
-                    color:
-                        themeProvider.isDarkTheme ? Colors.white : Colors.black,
+                  SizedBox(
+                    height: 10,
                   ),
-                  title: Text(
-                    'Province',
-                    style: TextStyle(
-                      fontSize: 18,
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/icons/Glories.png",
+                      height: 50,
+                      width: 50,
+                      color: themeProvider.isDarkTheme
+                          ? Colors.white
+                          : Colors.black,
                     ),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProvinceScreen()));
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ListTile(
-                  leading: Image.asset(
-                    "assets/icons/share.png",
-                    height: 50,
-                    width: 50,
-                    color:
-                        themeProvider.isDarkTheme ? Colors.white : Colors.black,
-                  ),
-                  title: Text(
-                    'Share Us',
-                    style: TextStyle(
-                      fontSize: 18,
+                    title: Text(
+                      'Glories',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => GloriesScreen()));
+                    },
                   ),
-                  onTap: () {},
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ListTile(
-                  leading: Image.asset(
-                    "assets/icons/aboutus.png",
-                    height: 50,
-                    color:
-                        themeProvider.isDarkTheme ? Colors.white : Colors.black,
-                    width: 50,
+                  SizedBox(
+                    height: 10,
                   ),
-                  title: Text(
-                    'About US',
-                    style: TextStyle(
-                      fontSize: 18,
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/icons/religion.png",
+                      height: 50,
+                      width: 50,
+                      color: themeProvider.isDarkTheme
+                          ? Colors.white
+                          : Colors.black,
                     ),
-                  ),
-                  onTap: () {},
-                ),
-                Container(
-                  height: 50,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(20)),
-                  child: Center(
-                      child: Text(
-                    'Exit',
-                    style: TextStyle(
-                      fontSize: 18,
+                    title: Text(
+                      'Religions',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
-                  )),
-                )
-              ],
-            ),
-          )
-        ]),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ReligionsScreen()));
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/icons/Martyrsicon.png",
+                      height: 50,
+                      color: themeProvider.isDarkTheme
+                          ? Colors.white
+                          : Colors.black,
+                      width: 50,
+                    ),
+                    title: Text(
+                      'Martyrs',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MartyrsScreen()));
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/icons/Province.png",
+                      height: 50,
+                      width: 50,
+                      color: themeProvider.isDarkTheme
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+                    title: Text(
+                      'Province',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProvinceScreen()));
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/icons/share.png",
+                      height: 50,
+                      width: 50,
+                      color: themeProvider.isDarkTheme
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+                    title: Text(
+                      'Share Us',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: Image.asset(
+                      "assets/icons/aboutus.png",
+                      height: 50,
+                      color: themeProvider.isDarkTheme
+                          ? Colors.white
+                          : Colors.black,
+                      width: 50,
+                    ),
+                    title: Text(
+                      'About US',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      bool shouldExit = await showExitDialog(context);
+                      if (shouldExit) {
+                        SystemNavigator.pop();
+                      }
+                      await onTapButton();
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 150,
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Center(
+                          child: Text(
+                        'Exit',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      )),
+                    ),
+                  )
+                ],
+              ),
+            )
+          ]),
+        ),
       ),
     );
   }

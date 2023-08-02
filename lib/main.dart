@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nepali_culture/Screens/splashscreen.dart';
 import 'package:nepali_culture/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
   runApp(const NepaliCulture());
 }
 
